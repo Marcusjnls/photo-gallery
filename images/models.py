@@ -10,3 +10,8 @@ class Image(models.Model):
     gallery_image = models.ImageField(upload_to='picha/', blank=True)
     categories = models.ManyToManyField(categories)
     location = models.ForeignKey(Location)
+
+    @classmethod
+    def all_images(self):
+
+        return Image.objects.all()
