@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
 # Create your models here.
+class Categories(models.Model):
+    name=models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
 class Location(models.Model):
     name=models.CharField(max_length=30)
 
@@ -12,8 +17,8 @@ class Location(models.Model):
 class Image(models.Model):
     name= models.CharField(max_length=50)
     description = HTMLField()
-    gallery_image = models.ImageField(upload_to='picha/', blank=True)
-    categories = models.ManyToManyField(categories)
+    gallery_image = models.ImageField(upload_to='pics/', blank=True)
+    categories = models.ManyToManyField(Categories)
     location = models.ForeignKey(Location)
 
     @classmethod
