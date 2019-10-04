@@ -25,3 +25,8 @@ class Image(models.Model):
     def view_location(cls,name):
         location = cls.objects.filter(location=name)
         return location
+
+    @classmethod
+    def view_category(cls,cat):
+        categories = cls.objects.filter(categories=cat)
+        return categories
