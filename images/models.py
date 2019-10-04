@@ -20,3 +20,8 @@ class Image(models.Model):
     def search_by_category(cls,search_images):
         images = Image.objects.filter(categories__name__icontains=search_images)
         return images
+
+    @classmethod
+    def view_location(cls,name):
+        location = cls.objects.filter(location=name)
+        return location
