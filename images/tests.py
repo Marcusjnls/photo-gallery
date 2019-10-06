@@ -58,3 +58,12 @@ class categoriesTest(TestCase):
     def test_instance(self):
         self.nature.save()
         self.assertTrue(isinstance(self.nature, Categories))
+
+class LocationTest(TestCase):
+    def setUp(self):
+        self.nairobi = Location(name='nairobi')
+
+    def test_instance(self):
+        self.nairobi.save()
+        self.assertTrue(isinstance(self.nairobi, Location))
+
