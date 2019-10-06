@@ -6,7 +6,7 @@ from .models import *
 def home(request):
     images = Image.objects.all()
     location = Location.objects.all()
-    category = categories.objects.all()
+    category = Categories.objects.all()
 
     if 'location' in request.GET and request.GET['location']:
         name = request.GET.get('location')

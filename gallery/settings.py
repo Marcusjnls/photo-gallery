@@ -18,54 +18,14 @@ from decouple import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'fsdg7f9s6fv89uj3wre'
+SECRET_KEY = 'pyu5j!zclbllfvnyr$*t05himbw-=!s%2p8hl)2+n'
 
+DEBUG = False
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-
+MODE = 'prod'
 # SECURITY WARNING: don't run with debug turned on in production!
-MODE=config("MODE", default="dev")
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-# development
-if config('MODE')=="dev":
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
-       }
-
-   }
-# production
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.localhost', '.herokuapp.com', '.127.0.0.1']
 
 
 
@@ -83,6 +43,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # Simplified static file serving.
+    # https://warehouse.python.org/project/whitenoise/
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -114,6 +76,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gallery.wsgi.application'
 
+# Database
+# https://docs.djangoproject.com/en/1.25/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'gallery',
+        'USER': 'jean-louis',
+        'PASSWORD': 'astonmartin',
+    }
+}
 
 
 # Password validation
@@ -149,11 +121,19 @@ USE_L10N = True
 USE_TZ = True
 
 
+DISABLE_COLLECTSTATIC = 1
+
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]

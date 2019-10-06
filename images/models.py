@@ -21,8 +21,11 @@ class Image(models.Model):
     categories = models.ManyToManyField(Categories)
     location = models.ForeignKey(Location)
 
+    def __str__(self):
+        return self.name
+        
     @classmethod
-    def all_images(self):
+    def all_images(cls, self):
 
         return Image.objects.all()
 
@@ -40,3 +43,6 @@ class Image(models.Model):
     def view_category(cls,cat):
         categories = cls.objects.filter(categories=cat)
         return categories
+
+    class Meta:
+        ordering = ['name']
