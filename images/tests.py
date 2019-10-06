@@ -7,14 +7,14 @@ class ImageTest(TestCase):
     # def class instance setup for the project
     def setUp(self):
         self.nairobi = Location.objects.create(name='Nairobi')
-        self.fun = categories.objects.create(name='fun')
-        self.music = categories.objects.create(name='music')
+        self.fun = Categories.objects.create(name='fun')
+        self.music = Categories.objects.create(name='music')
 
         self.drinks = Image.objects.create(
             name='drinks', location=self.nairobi,  description='picture of a drinks')
 
-        self.drinks.categories.add(self.fun)
-        self.drinks.categories.add(self.music)
+        self.drinks.Categories.add(self.fun)
+        self.drinks.Categories.add(self.music)
 
     # def a testcase for instance of the drinks class
     def test_instance(self):
@@ -50,3 +50,11 @@ class ImageTest(TestCase):
         self.drinks.save()
         categories = Image.view_category(self.music)
         self.assertTrue(len(categories) > 0)
+
+class categoriesTest(TestCase):
+    def setUp(self):
+        self.nature = Categories(name='nature')
+
+    def test_instance(self):
+        self.nature.save()
+        self.assertTrue(isinstance(self.nature, Categories))
